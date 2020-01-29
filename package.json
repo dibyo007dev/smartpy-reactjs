@@ -4,7 +4,7 @@
   "description": "React SmartPy BoilerPlate",
   "main": "server.js",
   "scripts": {
-    "migrate": "chmod +x ./SmartPy.sh; cd SmartPyBasic; ./SmartPy.sh run ./scripts/demo.py",
+    "migrate": "cd SmartPyBasic; chmod +x ./SmartPy.sh; ./SmartPy.sh run ./scripts/demo.py",
     "client-install": "npm install --prefix client",
     "start": "node server.js",
     "server": "nodemon server.js ",
