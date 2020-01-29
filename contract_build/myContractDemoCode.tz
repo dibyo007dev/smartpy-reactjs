@@ -1,0 +1,43 @@
+parameter int;
+storage   (pair (int %myParameter1) (int %myParameter2));
+code
+  {
+    DUP;        # pair(params, storage).pair(params, storage)
+    CDR;        # storage.pair(params, storage)
+    SWAP;       # pair(params, storage).storage
+    CAR;        # params.storage
+    # Entry point: myEntryPoint # params.storage
+    # sp.verify(self.data.myParameter1 <= 123) # params.storage
+    PUSH int 123; # int.params.storage
+    DIG 2;      # storage.int.params
+    DUP;        # storage.storage.int.params
+    DUG 3;      # storage.int.params.storage
+    CAR;        # int.int.params.storage
+    COMPARE;    # int.params.storage
+    LE;         # bool.params.storage
+    IF
+      {}
+      {
+        PUSH string "WrongCondition: self.data.myParameter1 <= 123"; # string.params.storage
+        FAILWITH;   # FAILED
+      }; # params.storage
+    # self.data.myParameter1 += params # params.storage
+    SWAP;       # storage.params
+    DUP;        # storage.storage.params
+    DUG 2;      # storage.params.storage
+    CDR;        # int.params.storage
+    SWAP;       # params.int.storage
+    DUP;        # params.params.int.storage
+    DUG 2;      # params.int.params.storage
+    DIG 3;      # storage.params.int.params
+    DUP;        # storage.storage.params.int.params
+    DUG 4;      # storage.params.int.params.storage
+    CAR;        # int.params.int.params.storage
+    ADD;        # int.int.params.storage
+    PAIR;       # pair int int.params.storage
+    DUG 2;      # params.storage.pair int int
+    DROP;       # storage.pair int int
+    DROP;       # pair int int
+    NIL operation; # list operation.pair int int
+    PAIR;       # pair (list operation) (pair int int)
+  } # pair (list operation) (pair int int)

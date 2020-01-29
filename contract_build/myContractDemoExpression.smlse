@@ -1,0 +1,3 @@
+(storage (record 17 (myParameter1 (literal (intOrNat 12) 17)) (myParameter2 (literal (intOrNat 13) 17)))
+messages ((myEntryPoint ((verify (le (attr (data) "myParameter1" 20) (literal (intOrNat 123) 20) 20) False 20) (set (attr (data) "myParameter1" 20) (add (attr (data) "myParameter1" 20) (params 18) 21) 21))))
+flags())
